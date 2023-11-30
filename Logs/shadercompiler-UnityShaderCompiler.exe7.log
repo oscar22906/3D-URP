@@ -16,3 +16,4 @@ Cmd: compileSnippet
 Cmd: disassembleShader
  name=ProPixelizer/SRP/PixelizedWithOutline platform=d3d11 type=17 mask=6 insize=2930 outsize=4441 ok=1
 
+Cmd: shutdown

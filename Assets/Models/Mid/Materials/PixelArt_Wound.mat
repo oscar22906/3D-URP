@@ -127,12 +127,12 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.39545453
     - _GlossyReflections: 1
-    - _ID: 1
+    - _ID: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PixelSize: 2
+    - _PixelSize: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.39545453
@@ -148,7 +148,7 @@ Material:
     - _AmbientLight: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _BaseColor: {r: 0.6000001, g: 0.21722424, b: 0.16270119, a: 1}
     - _Color: {r: 0.6000001, g: 0.21722421, b: 0.16270116, a: 1}
-    - _EdgeHighlightColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - _EdgeHighlightColor: {r: 1, g: 0, b: 0.61351156, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 0.5}
     - _PixelGridOrigin: {r: 0, g: 0, b: 0, a: 0}

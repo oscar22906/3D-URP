@@ -53,3 +53,11 @@ Update Mode: mergeDefaultDependencies
 The following packages were added:
   com.unity.cinemachine@2.8.9
   com.unity.inputsystem@1.4.4
+
+=== Thu Dec  7 21:36:39 2023
+
+Packages were changed.
+Update Mode: mergeDefaultDependencies
+
+The following packages were added:
+  com.unity.postprocessing@3.2.2

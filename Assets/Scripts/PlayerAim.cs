@@ -51,6 +51,11 @@ public class PlayerAim : MonoBehaviour
         {
             weapon.StartFiring();
         }
+        if(weapon.isFiring)
+        {
+            weapon.UpdateFiring(Time.deltaTime);
+        }
+        weapon.UpdateBullets(Time.deltaTime);
         if (Input.GetButtonUp("Fire1"))
         {
             weapon.StopFiring();

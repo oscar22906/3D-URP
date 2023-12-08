@@ -1,4 +1,6 @@
-﻿ using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -14,7 +16,8 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
-
+        public float moveSpeedStore;
+        public float sprintSpeedStore;
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -149,6 +152,9 @@ namespace StarterAssets
 
             AssignAnimationIDs();
 
+            moveSpeedStore = MoveSpeed;
+            sprintSpeedStore = SprintSpeed;
+
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
@@ -167,6 +173,18 @@ namespace StarterAssets
         private void LateUpdate()
         {
             CameraRotation();
+            if (Input.GetButtonDown("Fire2"))
+            {
+                MoveSpeed = 2.0f;
+                SprintSpeed = 3.0f;
+            }
+            if (Input.GetButtonUp("Fire2"))
+            {
+                MoveSpeed = moveSpeedStore;
+                SprintSpeed = sprintSpeedStore;
+            }
+
+
         }
 
         private void AssignAnimationIDs()

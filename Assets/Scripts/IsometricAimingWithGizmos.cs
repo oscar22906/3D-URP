@@ -10,6 +10,8 @@ namespace BarthaSzabolcs.IsometricAiming
 
         private Vector3 hitPosition;
         private GameObject lookAtPoint;
+        public bool lockAtY;
+        public float posY = 1;
 
         [Header("Aim")]
         [SerializeField] private bool aim;
@@ -63,6 +65,11 @@ namespace BarthaSzabolcs.IsometricAiming
         {
             var (success, position) = GetMousePosition();
             hitPosition = position;
+            if (lockAtY == true)
+            {
+                hitPosition.y = posY;
+            }
+
             if (hitPosition != null)
             {
                 // If lookAtPoint doesn't exist, create it

@@ -13,7 +13,7 @@ public class RaycastWeapon : MonoBehaviour
     }
 
     public bool isFiring = false;
-    public int fireRate = 1;
+    public float fireRate = 0.5f;
     public float bulletSpeed = 1000.0f;
     public float bulletDrop = 0.0f; 
     public ParticleSystem[] muzzleFlash;
@@ -21,12 +21,18 @@ public class RaycastWeapon : MonoBehaviour
     public TrailRenderer tracerEffect;
     public Transform raycastOrigin;
     public Transform raycastDestination;
+    public WeaponRecoil recoil;
 
     Ray ray;
     RaycastHit hitInfo;
     float accumulatedTime;
     List<Bullet> bullets = new List<Bullet>();
     float maxLifetime = 3.0f;
+
+    private void Awake()
+    {
+        recoil = GetComponent<WeaponRecoil>();
+    }
 
     Vector3 GetPosition(Bullet bullet)
     {
@@ -48,23 +54,29 @@ public class RaycastWeapon : MonoBehaviour
     public void StartFiring()
     {
         isFiring = true;
-        accumulatedTime = 0.0f;
-        FireBullet();
+        if(accumulatedTime >= 0.0f)
+        {
+            FireBullet();
+            accumulatedTime = 0.0f;
+        }
+
+
     }
 
     public void UpdateFiring(float deltaTime)
     {
-        accumulatedTime += deltaTime;
         float fireInterval = 1.0f / fireRate;
-        while(accumulatedTime >= 0.0f)
+        while (accumulatedTime >= 0.0f)
         {
             FireBullet();
             accumulatedTime -= fireInterval;
         }
+
     }
 
     public void UpdateBullets(float deltaTime)
     {
+        accumulatedTime += deltaTime;
         SimulateBullets(deltaTime);
         DestroyBullets();
     }
@@ -120,7 +132,7 @@ public class RaycastWeapon : MonoBehaviour
         var bullet = CreateBullet(raycastOrigin.position, velocity);
         bullets.Add(bullet);
 
-
+        recoil.GenerateRecoil();
 
 
 

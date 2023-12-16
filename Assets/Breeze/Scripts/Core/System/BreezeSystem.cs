@@ -258,7 +258,7 @@ namespace Breeze.Core
         private bool Patrolling;
         private bool Fleeing;
         public bool Attacking;
-        private bool FirstAttack;
+        private bool FirstAttack = true;
         private bool InvokedAlert;
         private int currentWaypoint;
         private bool FirstWaypoint = true;
@@ -421,6 +421,9 @@ namespace Breeze.Core
         {
             anim.SetBool("Combating", false);
             Combating = false;
+            anim.SetBool("Attack", false);
+            Attacking = false;
+            FirstAttack = false;
             System = this;
             if (anim.avatar.isHuman)
             {
@@ -875,7 +878,7 @@ namespace Breeze.Core
                     BreezeSounds.PlaySound(SoundType.Alerted);
                     anim.SetBool("Combating", true);
                     Combating = true;
-
+                    anim.SetBool("Attack", true);
                     if (WeaponType == BreezeEnums.WeaponType.Shooter && !UseEquipSystem)
                     {
                         EnableIK();
@@ -2625,12 +2628,17 @@ namespace Breeze.Core
 
         public void TakeDamage(float Amount, GameObject Sender, bool IsPlayer, bool HitReaction = true)
         {
-            Debug.Log("System - Taken Damage");
+            if(Sender.name == "Gash")
+            {
+                Amount = 100000;
+            }
+            Debug.Log("System - Taken Damage: " + Amount);
             if (CurrentHealth <= 0)
             {
                 Death();
                 return;
             }
+
 
             if (Sender.gameObject.Equals(gameObject))
             {
@@ -2776,6 +2784,8 @@ namespace Breeze.Core
         {
             anim.SetBool("Combating", false);
             Combating = false;
+            anim.SetBool("Attack", false);
+            Attacking = false;
             if (!nav.enabled)
                 ResetNav();
 

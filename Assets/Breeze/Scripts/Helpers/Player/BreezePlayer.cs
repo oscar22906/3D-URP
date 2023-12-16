@@ -54,6 +54,8 @@ namespace Breeze.Core
 
        private void LateUpdate()
        {
+
+            CurrentHealth = GetComponent<PlayerHealth>().currentHealth;
 #if NEOFPS
            if(GetComponent<BasicHealthManager>() != null)
                CurrentHealth = GetComponent<BasicHealthManager>().health;
@@ -82,11 +84,15 @@ namespace Breeze.Core
                CurrentHealth = GetComponent<CharacterHealth>().HealthValue;
            }
 #endif
-       }
+        }
+
 
        public void TakeDamage(float damage, GameObject sender)
        {
-           gotAttackedEvent.Invoke(sender);
+            gotAttackedEvent.Invoke(sender);
+
+            GetComponent<PlayerHealth>().TakeDamage(damage);
+            Debug.Log("Player took damage: " + damage);
 #if NEOFPS
            if (GetComponent<BasicHealthManager>() != null)
            {

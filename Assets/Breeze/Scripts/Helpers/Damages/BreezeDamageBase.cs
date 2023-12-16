@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Breeze.Core;
 
 namespace Breeze.Core
 {
@@ -15,9 +16,12 @@ namespace Breeze.Core
         public BreezeSystem System { get; set; }
         public void TakeDamage(float Amount, GameObject Sender, bool IsPlayer, bool HitReaction = true)
         {
-            if(System == null || !CanReceiveDamage)
+            Debug.Log("Hit Recieved by damage base.");
+            GetComponent<BreezeSystem>().TakeDamage(Amount * DamageMultiplier, Sender, IsPlayer, HitReaction);
+            if (System == null || !CanReceiveDamage)
                 return;
-            
+            Debug.Log(gameObject.name + " took damage: " + Amount);
+
             System.TakeDamage(Amount * DamageMultiplier, Sender, IsPlayer, HitReaction);
         }
     }

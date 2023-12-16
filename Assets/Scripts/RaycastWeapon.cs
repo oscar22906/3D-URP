@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Breeze.Core;
 
 public class RaycastWeapon : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class RaycastWeapon : MonoBehaviour
         public TrailRenderer tracer;
     }
 
+    public float bulletDamage = 20;
+
+    public GameObject player;
     public bool isFiring = false;
     public float fireRate = 0.5f;
     public float bulletSpeed = 1000.0f;
@@ -105,11 +109,18 @@ public class RaycastWeapon : MonoBehaviour
         ray.direction = direction;
         if (Physics.Raycast(ray, out hitInfo))
         {
+            //old code
             //Debug.DrawLine(ray.origin, hitInfo.point, Color.red, 1.0f);
+
+            if (hitInfo.transform.GetComponent<BreezeDamageBase>() != null)
+            {
+                hitInfo.transform.GetComponent<BreezeDamageBase>().TakeDamage(bulletDamage, player, true);
+                Debug.Log("Raycast Fired and hit Breeze AI person thing :)");
+            }
 
             hitEffect.transform.position = hitInfo.point;
             hitEffect.transform.forward = hitInfo.normal;
-            hitEffect.Emit(1);
+            hitEffect.Emit(1);                                                      // Muzzle flash
 
             bullet.tracer.transform.position = hitInfo.point;
             bullet.time = maxLifetime; 

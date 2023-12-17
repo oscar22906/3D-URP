@@ -32,9 +32,9 @@ Material:
     - _GlowOuter: 0.273
     - _GlowPower: 0.351
     - _OutlineSoftness: 0
-    - _ScaleRatioA: 0.8
-    - _ScaleRatioB: 0.7
-    - _ScaleRatioC: 0.7
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _UnderlaySoftness: 0.029
     m_Colors:
     - _GlowColor: {r: 1, g: 0.593477, b: 0, a: 1}

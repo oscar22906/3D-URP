@@ -33,9 +33,12 @@ public class RaycastWeapon : MonoBehaviour
     List<Bullet> bullets = new List<Bullet>();
     float maxLifetime = 3.0f;
 
+    public RandomSounds soundScript;
+
     private void Awake()
     {
         recoil = GetComponent<WeaponRecoil>();
+        soundScript = GetComponent<RandomSounds>();
     }
 
     Vector3 GetPosition(Bullet bullet)
@@ -137,7 +140,7 @@ public class RaycastWeapon : MonoBehaviour
         {
             particle.Emit(1);
         }
-
+        soundScript.GunSound();
 
         Vector3 velocity = (raycastDestination.position - raycastOrigin.position).normalized * bulletSpeed;
         var bullet = CreateBullet(raycastOrigin.position, velocity);

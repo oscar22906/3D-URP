@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] AudioSource buttonPressSound;
-    public Animator animator;
+   
 
     public void LoadGame()
     {

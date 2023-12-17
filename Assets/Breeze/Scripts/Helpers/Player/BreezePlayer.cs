@@ -32,8 +32,19 @@ namespace Breeze.Core
        public float CurrentHealth = 100f;
        public Transform HitPosition;
 
-       [HideInInspector] public UnityEvent<GameObject> gotAttackedEvent = new UnityEvent<GameObject>();
+        public float blinkIntensity;
+        public float blinkDuration;
+        float blinkTimer;
 
+        public GameObject player;
+
+        SkinnedMeshRenderer skinnedMeshRenderer;
+
+       [HideInInspector] public UnityEvent<GameObject> gotAttackedEvent = new UnityEvent<GameObject>();
+        void Start()
+        {
+            skinnedMeshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        }
        private void OnValidate()
        {
            if(Application.isPlaying)
@@ -93,6 +104,13 @@ namespace Breeze.Core
 
             GetComponent<PlayerHealth>().TakeDamage(damage);
             Debug.Log("Player took damage: " + damage);
+            if(CurrentHealth <= 0.0f)
+            {
+                Die();
+            }
+
+            blinkTimer = blinkDuration;
+
 #if NEOFPS
            if (GetComponent<BasicHealthManager>() != null)
            {
@@ -128,5 +146,17 @@ namespace Breeze.Core
            }
 #endif
        }
+        private void Die()
+        {
+            player.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (CurrentHealth <= 0.0f)
+            {
+                Die();
+            }
+        }
     }
 }
